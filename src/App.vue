@@ -6,7 +6,7 @@
   const pokemons = ref([]);
 
   async function fetchPokemons(){
-    api.get("/pokemon?limit=" + limit.value).then((response) => {
+    api.getPokemons(limit.value).then((response) => {
       pokemons.value = response.results;
     });
   }

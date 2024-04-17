@@ -5,8 +5,8 @@ const api = {
     return data;
   },
 
-  async getPokemons() {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon");
+  async getPokemons(limit) {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=" + limit);
     const data = await response.json();
     return data;
   },
