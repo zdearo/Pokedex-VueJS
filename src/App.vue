@@ -1,11 +1,10 @@
 <script setup>
   import { onMounted, ref, computed, watch } from 'vue';
   import api from './services/api';
-  import PokemonList from './components/PokemonList.vue'
+  import PokemonCard from './components/PokemonList/PokemonCard.vue';
 
-  let limit = ref(151);
+  let limit = ref(20);
   let search = ref();
-  const svgUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/"
   const pokemons = ref([]);
 
   async function fetchPokemons(){
@@ -45,11 +44,11 @@
       <label for="name">Nome</label>
       <input v-model="search" class="mx-2 p-1 rounded" type="text" name="name">
     </div>
-    <div class="grid grid-cols-8 gap-2">
-      <PokemonList
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <PokemonCard
         v-for="pokemon in pokemonsFiltered"
         :name="pokemon.name"
-        :imageCode="svgUrl + pokemon.url.split('/')[6] + '.svg'"/>
+        :pokemonCode="pokemon.url.split('/')[6]"/>
     </div>
   </main>
 </template>
