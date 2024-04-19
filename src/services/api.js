@@ -1,21 +1,18 @@
-const api = {
-  async get(url){
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  },
+import { ref, toValue, watchEffect } from 'vue';
 
-  async getPokemon(pokemon){
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-    const data = await response.json();
-    return data;
-  },
+export function usePokeApi(url){
+  const data = ref(null);
+  const error = ref(null);
 
-  async getPokemons(limit) {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);
-    const data = await response.json();
-    return data;
-  },
-};
+  watchEffect(async () => {
+    data.value = null;
+    error.value = null;
+    
+    fetch(toValue(url))
+      .then(response => response.json())
+      .then(json => data.value = json)
+      .catch(err => error.value = err);
+  })
 
-export default api;
+  return { data, error };
+}

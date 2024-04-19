@@ -1,44 +1,54 @@
 <script setup>
   import { computed, ref, onMounted, watch, defineProps } from 'vue';
   import Badge from './Badge.vue';
-  import api from '../../services/api';
+  import { usePokeApi } from '../../services/api';
 
-  const props = defineProps(['name', 'pokemonCode']);
+  const props = defineProps({
+    name: String,
+    pokemonCode: String,
+  });
+
+  const baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
+  const url = computed(() => `${baseUrl}${props.pokemonCode}`);
+  
   const pokemonData = ref([]);
   const pokemonImage = computed(() => {
     return `node_modules/pokemon-sprites/sprites/pokemon/other/official-artwork/${props.pokemonCode}.png`;
   });
+  
+  const { data, error } = usePokeApi(url);
   const types = computed(() => {
-    return pokemonData.value.map(type => type.type.name);
+    return data.value ? data.value.types.map(type => type.type.name) : [];
   });
+
   const bgClasses = [{
     type: 'normal',
     bg: 'bg-normal'
   }, {
     type: 'fighting',
     bg: 'bg-fighting'
-  },{
+  }, {
     type: 'flying',
     bg: 'bg-flying'
-  },{
+  }, {
     type: 'poison',
     bg: 'bg-poison'
-  },{
+  }, {
     type: 'ground',
     bg: 'bg-ground'
-  },{
+  }, {
     type: 'rock',
     bg: 'bg-rock'
-  },{
+  }, {
     type: 'bug',
     bg: 'bg-bug'
-  },{
+  }, {
     type: 'ghost',
     bg: 'bg-ghost'
-  },{
+  }, {
     type: 'steel',
     bg: 'bg-steel'
-  },{
+  }, {
     type: 'fire',
     bg: 'bg-fire'
   }, {
@@ -53,19 +63,19 @@
   }, {
     type: 'psychic',
     bg: 'bg-psychic'
-  },{
+  }, {
     type: 'ice',
     bg: 'bg-ice'
-  },{
+  }, {
     type: 'dragon',
     bg: 'bg-dragon'
-  },{
+  }, {
     type: 'dark',
     bg: 'bg-dark'
-  },{
+  }, {
     type: 'fairy',
     bg: 'bg-fairy'
-  },{
+  }, {
     type: 'unknown',
     bg: 'bg-unknown'
   }]
@@ -76,18 +86,6 @@
     return bg ? bg.bg : 'bg-normal';
   });
 
-  onMounted(async () => {
-    await fetchPokemonData();
-  });
-
-  watch(() => props.pokemonCode, async () => {
-    await fetchPokemonData();
-  });
-
-  async function fetchPokemonData() {
-    const res = await api.getPokemon(props.pokemonCode);
-    pokemonData.value = res.types;
-  }
 </script>
 
 <template>
