@@ -50,7 +50,7 @@
 </script>
 
 <template>
-  <div class="rounded-3xl text-white flex justify-center h-48"
+  <div class="rounded-3xl text-white flex justify-center h-48 transform transition-transform duration-200 hover:scale-105 hover:cursor-pointer shadow-lg"
         :class="backgroundClass">
     <div class="flex justify-center flex-col items-start gap-3 w-3/6 ml-4">
       <h1 class="z-10 justify-self-start capitalize rounded-t-md font-bold text-3xl">{{ name }}</h1>
