@@ -20,7 +20,7 @@ export default {
         water: '#76bdfd',
         grass: '#49D0B0',
         electric: '#ffd86f',
-        psychic: '#ff6568',
+        psychic: '#fa7179',
         ice: '#58c9b9',
         dragon: '#53a4cf',
         dark: '#707070',

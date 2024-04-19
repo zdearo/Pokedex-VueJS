@@ -11,7 +11,6 @@
   const baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
   const url = computed(() => `${baseUrl}${props.pokemonCode}`);
   
-  const pokemonData = ref([]);
   const pokemonImage = computed(() => {
     return `node_modules/pokemon-sprites/sprites/pokemon/other/official-artwork/${props.pokemonCode}.png`;
   });
@@ -21,69 +20,31 @@
     return data.value ? data.value.types.map(type => type.type.name) : [];
   });
 
-  const bgClasses = [{
-    type: 'normal',
-    bg: 'bg-normal'
-  }, {
-    type: 'fighting',
-    bg: 'bg-fighting'
-  }, {
-    type: 'flying',
-    bg: 'bg-flying'
-  }, {
-    type: 'poison',
-    bg: 'bg-poison'
-  }, {
-    type: 'ground',
-    bg: 'bg-ground'
-  }, {
-    type: 'rock',
-    bg: 'bg-rock'
-  }, {
-    type: 'bug',
-    bg: 'bg-bug'
-  }, {
-    type: 'ghost',
-    bg: 'bg-ghost'
-  }, {
-    type: 'steel',
-    bg: 'bg-steel'
-  }, {
-    type: 'fire',
-    bg: 'bg-fire'
-  }, {
-    type: 'water',
-    bg: 'bg-water'
-  }, {
-    type: 'grass',
-    bg: 'bg-grass'
-  }, {
-    type: 'electric',
-    bg: 'bg-electric'
-  }, {
-    type: 'psychic',
-    bg: 'bg-psychic'
-  }, {
-    type: 'ice',
-    bg: 'bg-ice'
-  }, {
-    type: 'dragon',
-    bg: 'bg-dragon'
-  }, {
-    type: 'dark',
-    bg: 'bg-dark'
-  }, {
-    type: 'fairy',
-    bg: 'bg-fairy'
-  }, {
-    type: 'unknown',
-    bg: 'bg-unknown'
-  }]
+  const typeToBgClass = {
+    'fighting': 'bg-fighting',
+    'flying': 'bg-flying',
+    'poison': 'bg-poison',
+    'ground': 'bg-ground',
+    'rock': 'bg-rock',
+    'bug': 'bg-bug',
+    'ghost': 'bg-ghost',
+    'steel': 'bg-steel',
+    'fire': 'bg-fire',
+    'water': 'bg-water',
+    'grass': 'bg-grass',
+    'electric': 'bg-electric',
+    'psychic': 'bg-psychic',
+    'ice': 'bg-ice',
+    'dragon': 'bg-dragon',
+    'dark': 'bg-dark',
+    'fairy': 'bg-fairy',
+    'unknown': 'bg-unknown'
+  }
 
   const backgroundClass = computed(() => {
     const type = types.value[0];
-    const bg = bgClasses.find(bg => bg.type === type);
-    return bg ? bg.bg : 'bg-normal';
+    const bg = typeToBgClass[type];
+    return bg ? bg : 'bg-normal';
   });
 
 </script>
