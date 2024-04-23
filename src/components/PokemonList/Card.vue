@@ -12,7 +12,7 @@
   const url = computed(() => `${baseUrl}${props.pokemonCode}`);
   
   const pokemonImage = computed(() => {
-    return `node_modules/pokemon-sprites/sprites/pokemon/other/official-artwork/${props.pokemonCode}.png`;
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/02ed2f6ed8dabcb89037ec14cf0b2d61c56a7a74/sprites/pokemon/other/official-artwork/${props.pokemonCode}.png`;
   });
   
   const { data, error } = usePokeApi(url);

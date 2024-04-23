@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "pokemon-sprites": "github:PokeAPI/sprites",
     "vue": "^3.4.21"
   },
   "devDependencies": {
