@@ -1,5 +1,5 @@
 <script setup>
-  import { computed, ref, onMounted, watch, defineProps } from 'vue';
+  import { computed } from 'vue';
   import Badge from './Badge.vue';
   import { usePokeApi } from '../../services/api';
 
