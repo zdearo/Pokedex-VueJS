@@ -2,31 +2,35 @@
   import { ref, computed, watch } from 'vue';
   import { usePokeApi } from '../../services/api.js';
   import ErrorMessage from '../App/ErrorMessage.vue';
-  import { Card, Filters, Pagination } from '../PokemonList';
+  import { Card, Pagination } from '../PokemonList';
+  import Filters from '../PokemonFilters/Filters.vue';
 
 
   const baseUrl = 'https://pokeapi.co/api/v2/pokemon'
   const limit = ref(20);
   const offset = ref(0);
   const url = computed(() => `${baseUrl}?limit=${limit.value}&offset=${offset.value}`);
-  const search = ref();
+  const search = ref([]);
 
   const { data, error } = usePokeApi(url);
 
-  watch(search, (value) => {
-    limit.value = value ? data.value.count : 20;
+  watch(search.value, (value) => {
+    limit.value = value.length > 0 ? data.value.count : 20;
   })
 
   const pokemons = computed(() => {
-    if(data.value && search.value){
+    if(data.value && search.value.length > 0){
+      // return data.value.results.filter(pokemon => {
+      //   return pokemon.name.includes(search.value.toLowerCase());
+      // })
+
       return data.value.results.filter(pokemon => {
-        return pokemon.name.includes(search.value.toLowerCase());
+        return search.value.some(search => pokemon.name.includes(search.toLowerCase()));
       })
     }
 
     return data.value ? data.value.results : [];
   })
-
   
 </script>
 
