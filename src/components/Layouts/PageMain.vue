@@ -2,9 +2,7 @@
   import { ref, computed } from 'vue';
   import { usePokeApi } from '../../services/api.js';
   import ErrorMessage from '../App/ErrorMessage.vue';
-  import Card from '../PokemonList/Card.vue';
-  import Filters from '../PokemonList/Filters.vue';
-  import Pagination from '../PokemonList/Pagination.vue';
+  import { Card, Filters, Pagination } from '../PokemonList';
 
 
   const baseUrl = 'https://pokeapi.co/api/v2/pokemon'
@@ -17,7 +15,6 @@
 
   const pokemons = computed(() => {
     if(data.value && search.value){
-      limit.value = data.value ? data.value.results.length : 20;
       return data.value.results.filter(pokemon => {
         return pokemon.name.includes(search.value.toLowerCase());
       })
@@ -25,18 +22,19 @@
 
     return data.value ? data.value.results : [];
   })
+
+  
 </script>
 
 <template>
   <main class="flex items-center flex-col w-9/12 mx-auto">
     <Filters 
-      :search="search"
-      @update:search="search = $event"/>
+      v-model="search"/>
 
     <Pagination 
       :offset
       :limit
-      :data
+      :count="data ? data.count : 0"
       @update:offset="offset = $event"/>
 
     <ErrorMessage 

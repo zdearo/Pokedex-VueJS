@@ -1,12 +1,12 @@
 <script setup>
-  import { defineProps, defineEmits, computed } from 'vue';
+  import { computed } from 'vue';
 
-  const props = defineProps([ 'offset', 'limit', 'data']);
+  const props = defineProps([ 'offset', 'limit', 'count']);
   const emit = defineEmits(['update:offset']);
 
   const lastPage = computed(() => {
-    if (props.data && props.data.count && props.limit !== 0) {
-      return Math.ceil(props.data.count/props.limit);
+    if (props.count) {
+      return Math.ceil(props.count/props.limit);
     }
     return 0;
   });
