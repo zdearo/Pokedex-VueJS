@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import { ref, computed, watch } from 'vue';
   import { usePokeApi } from '../../services/api.js';
   import ErrorMessage from '../App/ErrorMessage.vue';
   import { Card, Filters, Pagination } from '../PokemonList';
@@ -12,6 +12,10 @@
   const search = ref();
 
   const { data, error } = usePokeApi(url);
+
+  watch(search, (value) => {
+    limit.value = value ? data.value.count : 20;
+  })
 
   const pokemons = computed(() => {
     if(data.value && search.value){
