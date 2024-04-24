@@ -32,7 +32,7 @@
       v-model="search"/>
 
     <Pagination 
-      :offset
+      v-model="offset"
       :limit
       :count="data ? data.count : 0"
       @update:offset="offset = $event"/>

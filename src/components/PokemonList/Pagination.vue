@@ -1,8 +1,8 @@
 <script setup>
   import { computed } from 'vue';
 
-  const props = defineProps([ 'offset', 'limit', 'count']);
-  const emit = defineEmits(['update:offset']);
+  const props = defineProps([ 'limit', 'count']);
+  let offset = defineModel();
 
   const lastPage = computed(() => {
     if (props.count) {
@@ -12,18 +12,18 @@
   });
 
   const activePage = computed(() => {
-    return props.offset/props.limit + 1;
+    return offset.value/props.limit + 1;
   });
 
   function nextPage(){
     if (activePage.value < lastPage.value) {
-      emit('update:offset', props.offset + props.limit);
+      offset.value = offset.value + props.limit;
     }
   }
 
   function previousPage(){
-    if (props.offset >= props.limit) {
-      emit('update:offset', props.offset - props.limit);
+    if (offset.value >= props.limit) {
+      offset.value = offset.value - props.limit;
     }
   }
 </script>
