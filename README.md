@@ -1,7 +1,13 @@
-# Vue 3 + Vite
+# Pokedex em Vue.js
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Descrição
 
-## Recommended IDE Setup
+Este projeto é uma Pokedex construída usando Vue.js que consome da PokeAPI.
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+## Instalação
+
+Para instalar e executar o projeto, siga as etapas abaixo:
+
+1. Clone o repositório
+2. Instale as dependências usando `npm install`
+3. Execute o servidor usando `npm run serve`
